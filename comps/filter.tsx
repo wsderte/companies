@@ -28,14 +28,14 @@ const Filter = ({ companies, handleDispatch }: IFilter) => {
                     return selectedFilterArr.includes(data.company)
                 }
             )
-            // console.log(filtered)
+
             // handleClick(filtered)
             handleDispatch(filtered)
         } else {
             // handleClick(companies)
             handleDispatch(companies)
         }
-    }, [company])
+    }, [company, companies])
 
     const onSwitchAction1 = (): void => {
         setCompany((prevState) => ({

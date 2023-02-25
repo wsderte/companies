@@ -47,14 +47,14 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const [isVisible, setIsVisible] = useState<boolean>(false)
     const [data, setData] = useState<IApiData>(companies)
-    // const [filteredData, setFilteredData] = useState(companies)
+    // const [filteredData, setFilteredData] = useState<IApiData>(companies)
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        // console.log(companies)
-        dispatch(setCurrentGame(companies))
-    }, [companies])
+    // useEffect(() => {
+    //     // console.log(companies)
+    //     dispatch(setCurrentGame(companies))
+    // }, [companies])
 
     const handleDispatch = (data: IApiData) => {
         dispatch(setCurrentGame(data))
@@ -98,6 +98,7 @@ export default function Home({
                 <GameTable
                     // companies={filteredData ? filteredData : data}
                     // companies={data}
+                    update={setData}
                     handleDispatch={handleDispatch}
                 />
             </main>

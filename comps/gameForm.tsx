@@ -32,6 +32,7 @@ const GameForm = ({ handleClick, update, handleDispatch }: IGameForm) => {
                 currency,
             }),
         })
+
         const data = await res
             .json()
             .then((response: { data: IApiData }): void => {

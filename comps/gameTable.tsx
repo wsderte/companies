@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { Dispatch, memo, SetStateAction } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { IApiData } from '../interface/data.interface'
@@ -6,6 +6,7 @@ import { IApiData } from '../interface/data.interface'
 import styles from '../styles/Home.module.css'
 
 interface IGameTable {
+    update: Dispatch<SetStateAction<IApiData>>
     handleDispatch: (data: IApiData) => void
 }
 
@@ -17,7 +18,7 @@ interface RootState {
     games: GamesState
 }
 
-const GameTable = ({ handleDispatch }: IGameTable) => {
+const GameTable = ({ update, handleDispatch }: IGameTable) => {
     const items = useSelector((state: RootState) => state.games.gamesArray)
 
     const createPayDate = async (bill: IApiData): Promise<void> => {
@@ -33,6 +34,7 @@ const GameTable = ({ handleDispatch }: IGameTable) => {
         })
         await res.json().then((response: { data: IApiData }): void => {
             handleDispatch(response.data)
+            update(response.data)
         })
     }
 
