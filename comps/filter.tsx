@@ -4,7 +4,7 @@ import { Form, Button, Table } from 'react-bootstrap'
 
 import styles from '../styles/Home.module.css'
 
-const Filter = ({ companies, handleClick }: any) => {
+const Filter = ({ companies, handleClick, handleDispatch }: any) => {
     const [company, setCompany] = useState({
         company1: false,
         company2: false,
@@ -23,9 +23,11 @@ const Filter = ({ companies, handleClick }: any) => {
                 return selectedFilterArr.includes(data.company)
             })
             // console.log(filtered)
-            handleClick(filtered)
+            // handleClick(filtered)
+            handleDispatch(filtered)
         } else {
-            handleClick(companies)
+            // handleClick(companies)
+            handleDispatch(companies)
         }
     }, [company])
 

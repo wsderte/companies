@@ -10,9 +10,10 @@ export default async function updateGames(req: any, res: any) {
         const client = await clientPromise
         const db: Collection = client.db().collection('companies')
 
-        db.findOneAndUpdate({ id: id }, { $set: { payDate: payDate } })
+        await db.findOneAndUpdate({ id: id }, { $set: { payDate: payDate } })
 
         const companiesList = await db.find({}).toArray()
+        // console.log(companiesList, "array of companies")
 
         res.status(201).json({
             message: 'POST request successful!',

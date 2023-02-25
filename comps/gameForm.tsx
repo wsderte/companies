@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Form, Button, Table } from 'react-bootstrap'
 import styles from '../styles/Home.module.css'
 
-const GameForm = ({ companies, handleClick, update }: any) => {
+const GameForm = ({ companies, handleClick, update, handleDispatch }: any) => {
     const [company, setCompany] = useState('Company1')
     const [game, setGame] = useState('')
     const [cost, setCost] = useState(0)
@@ -31,11 +31,10 @@ const GameForm = ({ companies, handleClick, update }: any) => {
             setCost(0)
             setCurrency('USD')
             update(() => response.data)
-            // console.log(companies, response.data, 'check')
-            // console.log(response.data)
+            handleDispatch(response.data)
         })
-        // router.replace('/', '/', { shallow: true })
-        console.log('Routing')
+
+        console.log('GameForm => CreateGame')
     }
 
     return (

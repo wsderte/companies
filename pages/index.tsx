@@ -8,8 +8,13 @@ import styles from '../styles/Home.module.css'
 import GameForm from '../comps/gameForm'
 import GameTable from '../comps/gameTable'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Filter from '../comps/filter'
+
+import { Provider, useDispatch, useSelector } from 'react-redux'
+import { store } from '../redux'
+import { setCurrentGame } from '../redux/games/reducer'
+import { Table } from 'react-bootstrap'
 
 export async function getServerSideProps() {
     try {
@@ -20,8 +25,6 @@ export async function getServerSideProps() {
             .collection('companies')
             .find({})
             .toArray()
-
-        // console.log(companiesList)
 
         return {
             props: { companies: JSON.parse(JSON.stringify(companiesList)) },
@@ -41,10 +44,23 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const [isVisible, setIsVisible] = useState(false)
     const [data, setData] = useState(companies)
-    const [filteredData, setFilteredData] = useState(companies)
+    // const [filteredData, setFilteredData] = useState(companies)
+    // ***************
+    const dispatch = useDispatch()
+    const items = useSelector((state: any) => state.games.gamesArray)
+    // ***************
+    useEffect(() => {
+        dispatch(setCurrentGame(companies))
+    }, [companies])
+
+    const handleDispatch = (data: any) => {
+        dispatch(setCurrentGame(data))
+    }
+
     if (errorMassage) {
         return <div>Some server problems</div>
     }
+
     return (
         <div className={styles.container}>
             <Head>
@@ -58,6 +74,7 @@ export default function Home({
                         companies={data}
                         handleClick={setIsVisible}
                         update={setData}
+                        handleDispatch={handleDispatch}
                     />
                 ) : (
                     <button
@@ -68,11 +85,16 @@ export default function Home({
                     </button>
                 )}
 
-                <Filter companies={data} handleClick={setFilteredData} />
+                <Filter
+                    companies={data}
+                    // handleClick={setFilteredData}
+                    handleDispatch={handleDispatch}
+                />
 
                 <GameTable
-                    companies={filteredData ? filteredData : data}
-                    setShowNewForm={() => {}}
+                    // companies={filteredData ? filteredData : data}
+                    companies={data}
+                    handleDispatch={handleDispatch}
                 />
             </main>
         </div>

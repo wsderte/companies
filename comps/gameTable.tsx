@@ -1,22 +1,32 @@
+import router from 'next/router'
 import { useState, useEffect, SetStateAction } from 'react'
 // import axios from 'axios'
 import { Form, Button, Table } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 
 import styles from '../styles/Home.module.css'
 
-const GameTable = (companies: any, setShowNewForm: any) => {
-    const [accounts, setAccounts] = useState([])
+const GameTable = ({ companies, handleDispatch }: any) => {
+    const items = useSelector((state: any) => state.games.gamesArray)
 
-    useEffect(() => {
-        setAccounts(companies.companies)
-        // console.log(accounts)
-        // HTTP запит до API для отримання списку компаній
-        // fetch
-        //     .get('/api/companies')
-        //     .then((response: { data: SetStateAction<never[]> }) => {
-        //         setCompanies(response.data)
-        //     })
-    }, [companies])
+    const createPayDate = async (bill: any) => {
+        // console.log(bill, 'Item payDate')
+        const res = await fetch('/api/game/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: bill.id,
+            }),
+        })
+        await res.json().then((response: { data: any }) => {
+            console.log(response.data, 'res 22222')
+            handleDispatch(response.data)
+        })
+
+        console.log('Routing')
+    }
 
     return (
         <Table striped bordered hover>
@@ -33,7 +43,7 @@ const GameTable = (companies: any, setShowNewForm: any) => {
             </thead>
             <tbody>
                 {/* {accounts ? accounts : null} */}
-                {accounts.map((data: any) => (
+                {items.map((data: any) => (
                     <tr key={data._id}>
                         <td>{data.id}</td>
                         <td>{data.company}</td>
@@ -48,7 +58,7 @@ const GameTable = (companies: any, setShowNewForm: any) => {
                                 <Button
                                     color="dark"
                                     className={styles['btn-pill']}
-                                    onClick={() => {}}
+                                    onClick={() => createPayDate(data)}
                                 >
                                     Рахунок оплачений
                                 </Button>
