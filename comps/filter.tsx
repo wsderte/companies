@@ -1,6 +1,6 @@
-import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
-// import axios from 'axios'
-import { Form, Button, Table } from 'react-bootstrap'
+import { useState, useEffect } from 'react'
+import { Form } from 'react-bootstrap'
+import { memo } from 'react'
 
 import styles from '../styles/Home.module.css'
 
@@ -54,6 +54,7 @@ const Filter = ({ companies, handleClick, handleDispatch }: any) => {
         <Form>
             <div className="mb-3">
                 <Form.Check
+                    className={styles.switch}
                     id="switchEnabled"
                     type="switch"
                     label="Company1"
@@ -61,14 +62,15 @@ const Filter = ({ companies, handleClick, handleDispatch }: any) => {
                     onChange={onSwitchAction1}
                 />
                 <Form.Check
+                    className={styles.switch}
                     type="switch"
                     id="custom-switch2"
                     label="Company2"
                     checked={company.company2}
                     onChange={onSwitchAction2}
-                    // onChange={(event) => handleClick2(event)}
                 />
                 <Form.Check
+                    className={styles.switch}
                     type="switch"
                     id="custom-switch3"
                     label="Company3"
@@ -79,4 +81,4 @@ const Filter = ({ companies, handleClick, handleDispatch }: any) => {
         </Form>
     )
 }
-export default Filter
+export default memo(Filter)

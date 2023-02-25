@@ -1,7 +1,5 @@
-import router from 'next/router'
-import { useState, useEffect, SetStateAction } from 'react'
-// import axios from 'axios'
-import { Form, Button, Table } from 'react-bootstrap'
+import { memo } from 'react'
+import { Button, Table } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 
 import styles from '../styles/Home.module.css'
@@ -31,20 +29,19 @@ const GameTable = ({ handleDispatch }: any) => {
     return (
         <Table striped bordered hover>
             <thead>
-                <tr>
+                <tr className={styles.tableLabel}>
                     <th>Номер рахунку</th>
                     <th>Компанія</th>
                     <th>Назва гри</th>
                     <th>Сума оплати</th>
                     <th>Валюта</th>
-                    <th>Дата Створення</th>
+                    <th className={styles.tableLabel}>Дата Створення</th>
                     <th>Дата оплати</th>
                 </tr>
             </thead>
             <tbody>
-                {/* {accounts ? accounts : null} */}
                 {items.map((data: any) => (
-                    <tr key={data._id}>
+                    <tr key={data._id} className={styles.tableLabel}>
                         <td>{data.id}</td>
                         <td>{data.company}</td>
                         <td>{data.game}</td>
@@ -70,4 +67,4 @@ const GameTable = ({ handleDispatch }: any) => {
         </Table>
     )
 }
-export default GameTable
+export default memo(GameTable)

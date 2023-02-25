@@ -11,10 +11,9 @@ import GameTable from '../comps/gameTable'
 import { useEffect, useState } from 'react'
 import Filter from '../comps/filter'
 
-import { Provider, useDispatch, useSelector } from 'react-redux'
-import { store } from '../redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentGame } from '../redux/games/reducer'
-import { Table } from 'react-bootstrap'
+import { IApiData } from '../interface/data.interface'
 
 export async function getServerSideProps() {
     try {
@@ -43,11 +42,14 @@ export default function Home({
     errorMassage,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const [isVisible, setIsVisible] = useState(false)
-    const [data, setData] = useState(companies)
+    const [data, setData] = useState<IApiData>(companies)
     // const [filteredData, setFilteredData] = useState(companies)
     // ***************
     const dispatch = useDispatch()
-    const items = useSelector((state: any) => state.games.gamesArray)
+    const items = useSelector(
+        (state: { games: { gamesArray: Array<string | number> } }) =>
+            state.games.gamesArray
+    )
     // ***************
     useEffect(() => {
         dispatch(setCurrentGame(companies))

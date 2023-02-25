@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
-import { Form, Button, Table } from 'react-bootstrap'
+import { memo } from 'react'
+import { useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
 import styles from '../styles/Home.module.css'
 
 const GameForm = ({ handleClick, update, handleDispatch }: any) => {
@@ -8,8 +8,6 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
     const [game, setGame] = useState('')
     const [cost, setCost] = useState(0)
     const [currency, setCurrency] = useState('USD')
-
-    const router = useRouter()
 
     const createGame = async (event: { preventDefault: () => void }) => {
         event.preventDefault()
@@ -26,7 +24,6 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
             }),
         })
         const data = await res.json().then((response: { data: any }) => {
-            // setAccounts([...accounts, response.data]);
             setGame('')
             setCost(0)
             setCurrency('USD')
@@ -126,4 +123,4 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
     )
 }
 
-export default GameForm
+export default memo(GameForm)
