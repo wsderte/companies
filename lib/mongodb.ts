@@ -6,10 +6,11 @@ import { MongoClient } from 'mongodb'
 
 //let apiKey = wsPB2JUKKEcNfFcCgzA8uIXjlI8ss11c7wc80504Dj5Z3giu6rih3B4OOX8yaGRU
 // let local = 'mongodb://localhost:27017/companies'
-const accessUri =
-    'mongodb+srv://ascellanova:zaqwer54321@cluster0.v3hns.mongodb.net/myFirstDatabase?authMechanism=DEFAULT'
+// const accessUri =
+//     'mongodb+srv://ascellanova:zaqwer54321@cluster0.v3hns.mongodb.net/myFirstDatabase?authMechanism=DEFAULT'
 
-const uri = accessUri
+const uri =
+    'mongodb+srv://ascellanova:zaqwer54321@cluster0.v3hns.mongodb.net/myFirstDatabase?authMechanism=DEFAULT'
 
 // 'mongodb://https://eu-central-1.aws.data.mongodb-api.com/app/data-brhhy/endpoint/data/v1'
 

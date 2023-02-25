@@ -21,13 +21,14 @@ const GameTable = lazy(() => import('../comps/gameTable'))
 export async function getServerSideProps() {
     try {
         const client = await clientPromise
-        const db = client.db('companies')
+        const db = client.db('')
 
         const companiesList = await db
             .collection('companies')
             .find({})
             .toArray()
 
+        console.log(companiesList)
         return {
             props: { companies: JSON.parse(JSON.stringify(companiesList)) },
         }
@@ -47,14 +48,11 @@ export default function Home({
     const [isVisible, setIsVisible] = useState(false)
     const [data, setData] = useState<IApiData>(companies)
     // const [filteredData, setFilteredData] = useState(companies)
-    // ***************
+
     const dispatch = useDispatch()
-    const items = useSelector(
-        (state: { games: { gamesArray: Array<string | number> } }) =>
-            state.games.gamesArray
-    )
-    // ***************
+
     useEffect(() => {
+        console.log(companies)
         dispatch(setCurrentGame(companies))
     }, [companies])
 
