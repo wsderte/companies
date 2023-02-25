@@ -47,7 +47,7 @@ const GameTable = ({ update, handleDispatch }: IGameTable) => {
                     <th>Назва гри</th>
                     <th>Сума оплати</th>
                     <th>Валюта</th>
-                    <th className={styles.tableLabel}>Дата Створення</th>
+                    <th>Дата Створення</th>
                     <th>Дата оплати</th>
                 </tr>
             </thead>
