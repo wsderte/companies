@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "redux/games/reducer.ts", "models/gameModel"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "redux/games/reducer.ts", "models/gameModel", "lib/connectDb"],
   "exclude": ["node_modules"]
 }
