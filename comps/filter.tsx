@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, lazy } from 'react'
+import { useState, useEffect, memo } from 'react'
 import { Form } from 'react-bootstrap'
 import styles from '../styles/Home.module.css'
 
