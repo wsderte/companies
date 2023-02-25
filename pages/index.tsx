@@ -28,7 +28,7 @@ export async function getServerSideProps() {
             .find({})
             .toArray()
 
-        console.log(companiesList)
+        // console.log(companiesList)
         return {
             props: { companies: JSON.parse(JSON.stringify(companiesList)) },
         }
@@ -45,18 +45,18 @@ export default function Home({
     companies,
     errorMassage,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState<boolean>(false)
     const [data, setData] = useState<IApiData>(companies)
     // const [filteredData, setFilteredData] = useState(companies)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(companies)
+        // console.log(companies)
         dispatch(setCurrentGame(companies))
     }, [companies])
 
-    const handleDispatch = (data: any) => {
+    const handleDispatch = (data: IApiData) => {
         dispatch(setCurrentGame(data))
     }
 
@@ -79,12 +79,14 @@ export default function Home({
                         handleDispatch={handleDispatch}
                     />
                 ) : (
-                    <button
-                        className={styles['btn-pill']}
-                        onClick={() => setIsVisible(true)}
-                    >
-                        Create Test
-                    </button>
+                    <div className={styles.btnBox}>
+                        <button
+                            className={styles.createBtn}
+                            onClick={() => setIsVisible(true)}
+                        >
+                            Create Test
+                        </button>
+                    </div>
                 )}
 
                 <Filter

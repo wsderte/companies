@@ -1,8 +1,22 @@
 // import { Collection } from 'mongodb'
+import { IApiData } from '../../../interface/data.interface'
 import { GetDate } from '../../../lib/getDate'
 import clientPromise from '../../../lib/mongodb'
 
-export default async function addGame(req: any, res: any) {
+interface Request {
+    body: IApiData
+}
+
+interface Response {
+    status(arg0: number): any
+    message: string
+    data: IApiData
+}
+
+export default async function addGame(
+    req: Request,
+    res: Response
+): Promise<void> {
     const { company, game, cost, currency, payDate } = req.body
     const createDate = GetDate()
     const paydate = payDate ? payDate : null
@@ -10,11 +24,6 @@ export default async function addGame(req: any, res: any) {
         const client = await clientPromise
         const db = client.db().collection('companies')
         console.log('CONNECTED TO MONGO')
-
-        // console.log(company)
-        // const testDoc = await Game.create({ company })
-        // await testDoc.save()
-        // db.insertOne({ id: 'productid', seq: 0 })
 
         const dbCounters = client.db('companies').collection('counters')
 

@@ -9,9 +9,10 @@ import { MongoClient } from 'mongodb'
 // const accessUri =
 //     'mongodb+srv://ascellanova:zaqwer54321@cluster0.v3hns.mongodb.net/myFirstDatabase?authMechanism=DEFAULT'
 
-const uri =
+const uri: string =
     'mongodb+srv://ascellanova:zaqwer54321@cluster0.v3hns.mongodb.net/myFirstDatabase?authMechanism=DEFAULT'
 
+console.log(process.env.MONGODB_URI, ' MONGODB_URI ')
 // 'mongodb://https://eu-central-1.aws.data.mongodb-api.com/app/data-brhhy/endpoint/data/v1'
 
 // process.env.MONGODB_URI

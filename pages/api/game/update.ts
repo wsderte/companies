@@ -1,7 +1,21 @@
 import clientPromise from '../../../lib/mongodb'
 import { GetDate } from '../../../lib/getDate'
+import { IApiData } from '../../../interface/data.interface'
 
-export default async function updateGames(req: any, res: any) {
+interface Request {
+    body: IApiData
+}
+
+interface Response {
+    status(arg0: number): any
+    message: string
+    data: IApiData
+}
+
+export default async function updateGames(
+    req: Request,
+    res: Response
+): Promise<void> {
     const { id } = req.body
     const payDate = GetDate()
 

@@ -1,9 +1,9 @@
 export const GetDate: () => string = () => {
-    let date = new Date()
+    let date: Date = new Date()
 
     date.setHours(date.getHours() + 2)
 
-    let createDate =
+    const createDate: string =
         new Date().toLocaleDateString() +
         ':' +
         date.toISOString().split('T')[1].substr(0, 8)

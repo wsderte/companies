@@ -1,15 +1,24 @@
-import { memo } from 'react'
+import { Dispatch, memo, SetStateAction } from 'react'
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
+import { IApiData } from '../interface/data.interface'
 import styles from '../styles/Home.module.css'
 
-const GameForm = ({ handleClick, update, handleDispatch }: any) => {
-    const [company, setCompany] = useState('Company1')
-    const [game, setGame] = useState('')
-    const [cost, setCost] = useState(0)
-    const [currency, setCurrency] = useState('USD')
+interface IGameForm {
+    handleClick: Dispatch<SetStateAction<boolean>>
+    update: Dispatch<SetStateAction<IApiData>>
+    handleDispatch: (data: IApiData) => void
+}
 
-    const createGame = async (event: { preventDefault: () => void }) => {
+const GameForm = ({ handleClick, update, handleDispatch }: IGameForm) => {
+    const [company, setCompany] = useState<string>('Company1')
+    const [game, setGame] = useState<string>('')
+    const [cost, setCost] = useState<number>(0)
+    const [currency, setCurrency] = useState<string>('USD')
+
+    const createGame = async (event: {
+        preventDefault: () => void
+    }): Promise<void> => {
         event.preventDefault()
         const res = await fetch('/api/game/add', {
             method: 'POST',
@@ -23,23 +32,29 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
                 currency,
             }),
         })
-        const data = await res.json().then((response: { data: any }) => {
-            setGame('')
-            setCost(0)
-            setCurrency('USD')
-            update(() => response.data)
-            handleDispatch(response.data)
-        })
+        const data = await res
+            .json()
+            .then((response: { data: IApiData }): void => {
+                setGame('')
+                setCost(0)
+                setCurrency('USD')
+                update(() => response.data)
+                handleDispatch(response.data)
+            })
 
         // console.log('GameForm => CreateGame')
     }
 
     return (
-        <Form onSubmit={(event) => createGame(event)}>
+        <Form
+            onSubmit={(event) => createGame(event)}
+            className={styles.formBox}
+        >
             <Form.Group controlId="company">
                 <Form.Label className={styles['label-wdth']}>
                     Компанія:
                 </Form.Label>
+
                 <Form.Control
                     className={styles.formControl}
                     as="select"
@@ -62,6 +77,7 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
                 <Form.Label className={styles['label-wdth']}>
                     Назва гри:
                 </Form.Label>
+
                 <Form.Control
                     className={styles.formControl}
                     type="text"
@@ -76,6 +92,7 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
                 <Form.Label className={styles['label-wdth']}>
                     Сума оплати:
                 </Form.Label>
+
                 <Form.Control
                     className={styles.formControl}
                     type="number"
@@ -90,6 +107,7 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
                 <Form.Label className={styles['label-wdth']}>
                     Валюта:
                 </Form.Label>
+
                 <Form.Control
                     className={styles.formControl}
                     as="select"
@@ -112,10 +130,11 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
             >
                 Створити новий рахунок
             </Button>
+
             <Button
                 color="dark"
                 className={styles['btn-pill']}
-                onClick={() => handleClick()}
+                onClick={() => handleClick(false)}
             >
                 Cancel
             </Button>

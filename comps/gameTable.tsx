@@ -1,13 +1,26 @@
 import { memo } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
+import { IApiData } from '../interface/data.interface'
 
 import styles from '../styles/Home.module.css'
 
-const GameTable = ({ handleDispatch }: any) => {
-    const items = useSelector((state: any) => state.games.gamesArray)
+interface IGameTable {
+    handleDispatch: (data: IApiData) => void
+}
 
-    const createPayDate = async (bill: any) => {
+interface GamesState {
+    gamesArray: Array<IApiData>
+}
+
+interface RootState {
+    games: GamesState
+}
+
+const GameTable = ({ handleDispatch }: IGameTable) => {
+    const items = useSelector((state: RootState) => state.games.gamesArray)
+
+    const createPayDate = async (bill: IApiData): Promise<void> => {
         // console.log(bill, 'Item payDate')
         const res = await fetch('/api/game/update', {
             method: 'PUT',
@@ -18,7 +31,7 @@ const GameTable = ({ handleDispatch }: any) => {
                 id: bill.id,
             }),
         })
-        await res.json().then((response: { data: any }) => {
+        await res.json().then((response: { data: IApiData }): void => {
             handleDispatch(response.data)
         })
     }
@@ -39,13 +52,13 @@ const GameTable = ({ handleDispatch }: any) => {
             <tbody>
                 {items.map((data: any) => (
                     <tr key={data._id} className={styles.tableLabel}>
-                        <td>{data.id}</td>
-                        <td>{data.company}</td>
-                        <td>{data.game}</td>
-                        <td>{data.cost}</td>
-                        <td>{data.currency}</td>
-                        <td>{data.createDate}</td>
-                        <td>
+                        <td className={styles.tableLabel}>{data.id}</td>
+                        <td className={styles.tableLabel}>{data.company}</td>
+                        <td className={styles.tableLabel}>{data.game}</td>
+                        <td className={styles.tableLabel}>{data.cost}</td>
+                        <td className={styles.tableLabel}>{data.currency}</td>
+                        <td className={styles.tableLabel}>{data.createDate}</td>
+                        <td className={styles.tableLabelPayDate}>
                             {data?.payDate ? (
                                 data.payDate
                             ) : (

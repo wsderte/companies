@@ -1,8 +1,14 @@
 import { useState, useEffect, memo } from 'react'
 import { Form } from 'react-bootstrap'
 import styles from '../styles/Home.module.css'
+import { IApiData } from './../interface/data.interface'
 
-const Filter = ({ companies, handleClick, handleDispatch }: any) => {
+interface IFilter {
+    companies: IApiData
+    handleDispatch: (data: IApiData) => void
+}
+
+const Filter = ({ companies, handleDispatch }: IFilter) => {
     const [company, setCompany] = useState({
         company1: false,
         company2: false,
@@ -17,9 +23,11 @@ const Filter = ({ companies, handleClick, handleDispatch }: any) => {
             if (company.company2) selectedFilterArr.push('Company2')
             if (company.company3) selectedFilterArr.push('Company3')
 
-            let filtered = companies.filter((data: any) => {
-                return selectedFilterArr.includes(data.company)
-            })
+            const filtered: any = companies.filter(
+                (data: IApiData): boolean => {
+                    return selectedFilterArr.includes(data.company)
+                }
+            )
             // console.log(filtered)
             // handleClick(filtered)
             handleDispatch(filtered)
@@ -29,19 +37,19 @@ const Filter = ({ companies, handleClick, handleDispatch }: any) => {
         }
     }, [company])
 
-    const onSwitchAction1 = () => {
+    const onSwitchAction1 = (): void => {
         setCompany((prevState) => ({
             ...prevState,
             company1: !prevState.company1,
         }))
     }
-    const onSwitchAction2 = () => {
+    const onSwitchAction2 = (): void => {
         setCompany((prevState) => ({
             ...prevState,
             company2: !prevState.company2,
         }))
     }
-    const onSwitchAction3 = () => {
+    const onSwitchAction3 = (): void => {
         setCompany((prevState) => ({
             ...prevState,
             company3: !prevState.company3,
