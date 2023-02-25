@@ -8,7 +8,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "mongodb": "^4.8.1",
-    "mongoose": "^6.10.0",
     "next": "latest",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",

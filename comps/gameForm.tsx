@@ -31,7 +31,7 @@ const GameForm = ({ handleClick, update, handleDispatch }: any) => {
             handleDispatch(response.data)
         })
 
-        console.log('GameForm => CreateGame')
+        // console.log('GameForm => CreateGame')
     }
 
     return (

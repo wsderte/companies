@@ -16,8 +16,18 @@ export default async function addGame(req: any, res: any) {
         // await testDoc.save()
         // db.insertOne({ id: 'productid', seq: 0 })
 
-        const dbCounters: Collection = client.db().collection('counters')
-        // await dbCounters.insertOne({ id: 'productid', seq: 0 })
+        const dbCounters: Collection = client
+            .db('companies')
+            .collection('counters')
+
+        const a = await dbCounters.find({}).toArray()
+
+        if (a[0]) {
+            console.log('winni')
+        } else {
+            await dbCounters.insertOne({ id: 'productid', seq: 0 })
+        }
+
         await dbCounters.findOneAndUpdate(
             { id: 'productid' },
             { $inc: { seq: 1 } }
