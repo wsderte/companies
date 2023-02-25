@@ -1,4 +1,4 @@
-import { Collection } from 'mongodb'
+// import { Collection } from 'mongodb'
 import { GetDate } from '../../../lib/getDate'
 import clientPromise from '../../../lib/mongodb'
 
@@ -8,7 +8,7 @@ export default async function addGame(req: any, res: any) {
     const paydate = payDate ? payDate : null
     try {
         const client = await clientPromise
-        const db: Collection = client.db().collection('companies')
+        const db = client.db().collection('companies')
         console.log('CONNECTED TO MONGO')
 
         // console.log(company)
@@ -16,9 +16,7 @@ export default async function addGame(req: any, res: any) {
         // await testDoc.save()
         // db.insertOne({ id: 'productid', seq: 0 })
 
-        const dbCounters: Collection = client
-            .db('companies')
-            .collection('counters')
+        const dbCounters = client.db('companies').collection('counters')
 
         const a = await dbCounters.find({}).toArray()
 

@@ -1,5 +1,4 @@
 import clientPromise from '../../../lib/mongodb'
-import { Collection } from 'mongodb'
 import { GetDate } from '../../../lib/getDate'
 
 export default async function updateGames(req: any, res: any) {
@@ -8,7 +7,7 @@ export default async function updateGames(req: any, res: any) {
 
     try {
         const client = await clientPromise
-        const db: Collection = client.db().collection('companies')
+        const db = client.db().collection('companies')
 
         await db.findOneAndUpdate({ id: id }, { $set: { payDate: payDate } })
 

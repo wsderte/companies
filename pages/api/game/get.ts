@@ -1,10 +1,10 @@
 import clientPromise from '../../../lib/mongodb'
-import { Collection } from 'mongodb'
+// import { Collection } from 'mongodb'
 
 export default async function getGames(req: any, res: any) {
     try {
         const client = await clientPromise
-        const db: Collection = client.db().collection('companies')
+        const db = client.db().collection('companies')
         console.log('CONNECTED TO MONGO')
 
         // console.log(company)
