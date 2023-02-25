@@ -5,15 +5,18 @@ import clientPromise from '../lib/mongodb'
 
 import styles from '../styles/Home.module.css'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentGame } from '../redux/games/reducer'
 import { IApiData } from '../interface/data.interface'
 
 import GameForm from '../comps/gameForm'
-import Filter from '../comps/filter'
-import GameTable from '../comps/gameTable'
+// import Filter from '../comps/filter'
+// import GameTable from '../comps/gameTable'
+
+const Filter = lazy(() => import('../comps/filter'))
+const GameTable = lazy(() => import('../comps/gameTable'))
 
 export async function getServerSideProps() {
     try {

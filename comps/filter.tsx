@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo, lazy } from 'react'
 import { Form } from 'react-bootstrap'
-import { memo } from 'react'
-
 import styles from '../styles/Home.module.css'
 
 const Filter = ({ companies, handleClick, handleDispatch }: any) => {
