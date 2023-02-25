@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 import styles from '../styles/Home.module.css'
 
-const GameTable = ({ companies, handleDispatch }: any) => {
+const GameTable = ({ handleDispatch }: any) => {
     const items = useSelector((state: any) => state.games.gamesArray)
 
     const createPayDate = async (bill: any) => {

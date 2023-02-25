@@ -30,8 +30,57 @@ $info: #1264A4; */
 }
 
 .label-wdth{
-    min-width: 100px;
+    min-width: 120px;
     display: inline-block;
+
+    font-weight: 500;
+    font-family: Raleway,sans-serif;
+    color: #282828;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+}
+
+.formControl{
+    width: 350px;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    height: 2.375rem;
+    padding: .5rem 1rem;
+
+    font-weight: 500;
+    font-family: Raleway,sans-serif;
+    color: #282828;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+
+    background-color: white;
+    border: 1px solid #787878;
+}
+
+.formSelect{
+    font-weight: 500;
+    height: 2.375rem;
+    font-size: .9rem;
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+
+    display: inline-block;
+    width: 100%;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background-color: #fff;
+    margin: 0;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.switch{
+    color: #282828;
 }
 
 /* html,
@@ -80,7 +129,7 @@ $info: #1264A4; */
     text-decoration: none;
 } */
 
-.title a {
+/* .title a {
     color: #0070f3;
     text-decoration: none;
 }
@@ -161,4 +210,4 @@ $info: #1264A4; */
         width: 100%;
         flex-direction: column;
     }
-}
+} */

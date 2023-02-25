@@ -71,7 +71,6 @@ export default function Home({
             <main>
                 {isVisible ? (
                     <GameForm
-                        companies={data}
                         handleClick={setIsVisible}
                         update={setData}
                         handleDispatch={handleDispatch}
@@ -93,7 +92,7 @@ export default function Home({
 
                 <GameTable
                     // companies={filteredData ? filteredData : data}
-                    companies={data}
+                    // companies={data}
                     handleDispatch={handleDispatch}
                 />
             </main>
