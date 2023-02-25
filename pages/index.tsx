@@ -5,15 +5,15 @@ import clientPromise from '../lib/mongodb'
 
 import styles from '../styles/Home.module.css'
 
-import GameForm from '../comps/gameForm'
-import GameTable from '../comps/gameTable'
-
 import { useEffect, useState } from 'react'
-import Filter from '../comps/filter'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentGame } from '../redux/games/reducer'
 import { IApiData } from '../interface/data.interface'
+
+import GameForm from '../comps/gameForm'
+import Filter from '../comps/filter'
+import GameTable from '../comps/gameTable'
 
 export async function getServerSideProps() {
     try {

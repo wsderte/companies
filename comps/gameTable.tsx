@@ -19,11 +19,8 @@ const GameTable = ({ handleDispatch }: any) => {
             }),
         })
         await res.json().then((response: { data: any }) => {
-            console.log(response.data, 'res 22222')
             handleDispatch(response.data)
         })
-
-        console.log('Routing')
     }
 
     return (
