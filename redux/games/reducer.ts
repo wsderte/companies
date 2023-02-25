@@ -1,4 +1,5 @@
 const { createSlice } = require('@reduxjs/toolkit')
+import { IApiData } from './../../interface/data.interface'
 
 const gamesSlice = createSlice({
     name: 'games',
@@ -7,8 +8,8 @@ const gamesSlice = createSlice({
     },
     reducers: {
         setCurrentGame: (
-            state: { gamesArray: any },
-            action: { payload: any }
+            state: { gamesArray: IApiData },
+            action: { payload: IApiData }
         ) => {
             state.gamesArray = action.payload
         },
